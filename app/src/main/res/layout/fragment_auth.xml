@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    tools:context=".ui.auth.AuthFragment"
+    android:orientation="vertical"
+
+    >
+<EditText
+    android:id="@+id/editPhone"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Hello blank fragment"
+    android:layout_gravity="center"
+    android:hint="Введение номера"
+    android:inputType="phone"
+    android:layout_marginHorizontal="24dp"/>
+
+    <Button
+        android:id="@+id/buttonSignIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="42dp"
+        android:layout_marginTop="16dp"
+        android:text="Отправлять"
+
+        />
+</LinearLayout>

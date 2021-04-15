@@ -20,6 +20,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentHomeBinding;
+import com.example.ad2l2.utils.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +44,12 @@ public class HomeFragment extends Fragment implements Listen {
                              ViewGroup container, Bundle savedInstanceState) {
         navController = NavHostFragment.findNavController(this);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-
+        App.fillDatabase.fillDao().getAll().observe(getViewLifecycleOwner(), new Observer<List<HomeModel>>() {
+            @Override
+            public void onChanged(List<HomeModel> homeModelList) {
+                homeAdapter.addList(homeModelList);
+            }
+        });
 
         getDataInFrom();
         binding.rv.setAdapter(homeAdapter);
@@ -67,15 +73,16 @@ public void Click(){
                         String a = result.getString("name");
                         String b = result.getString("number");
                         int id = result.getInt("id");
-                        Log.e("TAG", "onFragmentResult: " + a + b);
+
 
 
                         HomeModel model = homeAdapter.getModelTold(id);
                         if (model != null) {
                             model.setTitle(a);
                             model.setDescription(b);
+                            App.fillDatabase.fillDao().update(model);
                         }else {
-                            homeAdapter.addList(new HomeModel(a,b));
+                            App.fillDatabase.fillDao().insert(new HomeModel(a,b));
                         }
                     }
                 });
@@ -86,7 +93,7 @@ public void Click(){
         Bundle bundle = new Bundle();
         bundle.putString("namel" , homeModel.getTitle());
         bundle.putString("number1", homeModel.getDescription());
-        bundle.putInt("in", homeModel.getId());
+        bundle.putInt("id", homeModel.getId());
         getParentFragmentManager().setFragmentResult("2", bundle);
         navController.navigate(R.id.action_navigation_home_to_formFragment);
     }

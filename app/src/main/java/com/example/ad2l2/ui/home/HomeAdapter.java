@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ad2l2.databinding.ListItemBinding;
+import com.example.ad2l2.utils.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +62,10 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
 
         }return null;
     }
-
+     public void addList(List<HomeModel> homeModelList){
+        list = homeModelList;
+        notifyDataSetChanged();
+     }
     class HomeViewHolder extends  RecyclerView.ViewHolder{
         public HomeViewHolder(@NonNull ListItemBinding itemView) {
 
@@ -72,7 +76,7 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
         public void onBind(HomeModel homeModel, Listen listen){
         listItemBinding.nameItem.setText(homeModel.getTitle());
         listItemBinding.numberItem.setText(homeModel.getDescription());
-        listItemBinding.date.setText(homeModel.getDate());
+//        listItemBinding.date.setText(homeModel.getDate());
         listItemBinding.getRoot().setOnClickListener(v -> {
          listen.setDatForFrom(homeModel,getAdapterPosition());
 
@@ -85,8 +89,8 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
             adg.setPositiveButton(positive, new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    list.remove(getAdapterPosition());
-                    notifyDataSetChanged();
+                    App.fillDatabase.fillDao().delete(list.get(getAdapterPosition()));
+                    notifyItemChanged(getAdapterPosition());
 
                 }
             });

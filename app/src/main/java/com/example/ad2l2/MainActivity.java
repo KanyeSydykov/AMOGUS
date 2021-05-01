@@ -25,8 +25,9 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private NavController navController;
     private ActivityMainBinding binding;
-   private AppBarConfiguration appBarConfiguration;
-   private ArrayList<Integer> bottomList = new ArrayList<>();
+    private AppBarConfiguration appBarConfiguration;
+    private ArrayList<Integer> bottomList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,40 +37,40 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
-    appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications,R.id.navigation_profile)
+        appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications, R.id.navigation_profile)
                 .build();
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         bottomList.add(R.id.navigation_home);
         bottomList.add(R.id.navigation_profile);
-                bottomList.add(R.id.navigation_dashboard);
-                bottomList.add(R.id.navigation_notifications);
-                    navController.navigate(R.id.onBoardFragment);
+        bottomList.add(R.id.navigation_dashboard);
+        bottomList.add(R.id.navigation_notifications);
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            if (!bottomList.contains(destination.getId())) {
+                binding.navView.setVisibility(View.GONE);
 
-                     navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-                     if (!bottomList.contains(destination.getId())) {
-                         binding.navView.setVisibility(View.GONE);
-
-         }else binding.navView.setVisibility(View.VISIBLE);
+            } else binding.navView.setVisibility(View.VISIBLE);
             if (destination.getId() == R.id.onBoardFragment) {
                 getSupportActionBar().hide();
-            }else{  getSupportActionBar().show();
-        }});
+            } else {
+                getSupportActionBar().show();
+            }
+        });
 
-        }
+    }
 
-      public  void onPageSelected(int i ){
+    public void onPageSelected(int i) {
 
 
-      }
+    }
 
 
     @Override
     public boolean onSupportNavigateUp() {
 
 
-        return NavigationUI.navigateUp(navController,appBarConfiguration )|| super.onSupportNavigateUp();
+        return NavigationUI.navigateUp(navController, appBarConfiguration) || super.onSupportNavigateUp();
     }
 }

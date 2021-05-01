@@ -21,13 +21,15 @@ import androidx.navigation.ui.AppBarConfiguration;
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentHomeBinding;
 import com.example.ad2l2.utils.App;
+import com.example.ad2l2.utils.PrefsHelper;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeFragment extends Fragment implements Listen {
-   private HomeAdapter homeAdapter;
-   private int id;
+    private HomeAdapter homeAdapter;
+    private int id;
     private List<HomeModel> list = new ArrayList<>();
     private NavController navController;
     private FragmentHomeBinding binding;
@@ -43,6 +45,10 @@ public class HomeFragment extends Fragment implements Listen {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         navController = NavHostFragment.findNavController(this);
+        if (new PrefsHelper(requireContext()).isFirstTimeLaunch()) {
+            navController.navigate(R.id.action_navigation_home_to_onBoardFragment);
+        }
+
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         App.fillDatabase.fillDao().getAll().observe(getViewLifecycleOwner(), new Observer<List<HomeModel>>() {
             @Override
@@ -56,15 +62,17 @@ public class HomeFragment extends Fragment implements Listen {
         Click();
         return binding.getRoot();
 
-}
-public void Click(){
+    }
 
-  binding.fapAdd.setOnClickListener(v -> {
-      navController.navigate(R.id.action_navigation_home_to_formFragment);
-  });
+    public void Click() {
 
-}
-    private void getDataInFrom(){
+        binding.fapAdd.setOnClickListener(v -> {
+            navController.navigate(R.id.action_navigation_home_to_formFragment);
+        });
+
+    }
+
+    private void getDataInFrom() {
         //добавление
         getParentFragmentManager().setFragmentResultListener("key",
                 getViewLifecycleOwner(), new FragmentResultListener() {
@@ -75,14 +83,13 @@ public void Click(){
                         int id = result.getInt("id");
 
 
-
                         HomeModel model = homeAdapter.getModelTold(id);
                         if (model != null) {
                             model.setTitle(a);
                             model.setDescription(b);
                             App.fillDatabase.fillDao().update(model);
-                        }else {
-                            App.fillDatabase.fillDao().insert(new HomeModel(a,b));
+                        } else {
+                            App.fillDatabase.fillDao().insert(new HomeModel(a, b));
                         }
                     }
                 });
@@ -91,7 +98,7 @@ public void Click(){
     @Override
     public void setDatForFrom(HomeModel homeModel, int position) {
         Bundle bundle = new Bundle();
-        bundle.putString("namel" , homeModel.getTitle());
+        bundle.putString("namel", homeModel.getTitle());
         bundle.putString("number1", homeModel.getDescription());
         bundle.putInt("id", homeModel.getId());
         getParentFragmentManager().setFragmentResult("2", bundle);

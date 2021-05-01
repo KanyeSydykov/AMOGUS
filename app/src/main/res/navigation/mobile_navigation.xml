@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_navigation_home_to_formFragment"
             app:destination="@id/formFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_onBoardFragment"
+            app:destination="@id/onBoardFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_authFragment"
+            app:destination="@id/authFragment" />
     </fragment>
 
     <fragment
@@ -40,5 +46,21 @@
         android:id="@+id/onBoardFragment"
         android:name="com.example.ad2l2.ui.onBoard.OnBoardFragment"
         android:label="fragment_on_board"
-        tools:layout="@layout/fragment_on_board_s" />
+        tools:layout="@layout/fragment_on_board_s" >
+        <action
+            android:id="@+id/action_onBoardFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_onBoardFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.ad2l2.ui.auth.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" >
+        <action
+            android:id="@+id/action_authFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 </navigation>

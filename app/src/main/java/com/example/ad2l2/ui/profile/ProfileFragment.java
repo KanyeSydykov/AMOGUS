@@ -17,11 +17,8 @@ import android.widget.Toast;
 
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentProfileBinding;
-import com.example.ad2l2.utils.App;
 
 import java.io.IOException;
-
-import javax.xml.namespace.QName;
 
 public class ProfileFragment extends Fragment {
 

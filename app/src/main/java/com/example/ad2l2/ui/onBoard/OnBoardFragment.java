@@ -9,7 +9,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.viewpager2.widget.ViewPager2;
 
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +18,7 @@ import android.widget.Toast;
 
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentOnBoardSBinding;
-import com.example.ad2l2.utils.App;
 import com.example.ad2l2.utils.PrefsHelper;
-import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
 

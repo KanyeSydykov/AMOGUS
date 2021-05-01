@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "721808320124",
+    "project_id": "noteapp-a20a5",
+    "storage_bucket": "noteapp-a20a5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:721808320124:android:33a1b70b60b24466068bf9",
+        "android_client_info": {
+          "package_name": "com.example.ad2l2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "721808320124-46bk8d1apethevjlhahhnhgj29ou1tlu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ad2l2",
+            "certificate_hash": "6bc4da4924857a575cbb5d6a34296770a9e36872"
+          }
+        },
+        {
+          "client_id": "721808320124-qb40rte3lv5vfravcsi2qklsd51hblrk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMhbsJURKBk7qhjYu4ctKAw5ZjxGBj7Us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "721808320124-qb40rte3lv5vfravcsi2qklsd51hblrk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

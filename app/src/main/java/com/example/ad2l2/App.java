@@ -1,10 +1,10 @@
-package com.example.ad2l2.utils;
-
+package com.example.ad2l2;
 import android.app.Application;
 
 import androidx.room.Room;
 
 import com.example.ad2l2.ui.room.FillDatabase;
+import com.example.ad2l2.utils.PrefsHelper;
 
 public class App extends Application {
     public static FillDatabase fillDatabase;
@@ -20,6 +20,6 @@ public class App extends Application {
         fillDatabase = Room.databaseBuilder(
                 this, FillDatabase.class,"database"
         ).allowMainThreadQueries()
-           .build();
+                .build();
     }
 }

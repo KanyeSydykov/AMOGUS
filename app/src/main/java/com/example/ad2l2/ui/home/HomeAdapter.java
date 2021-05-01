@@ -5,13 +5,11 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ad2l2.databinding.ListItemBinding;
-import com.example.ad2l2.utils.App;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -13,23 +13,60 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ad2l2.R;
+import com.example.ad2l2.databinding.FragmentDashboardBinding;
+import com.example.ad2l2.ui.home.HomeAdapter;
+import com.example.ad2l2.ui.home.HomeModel;
+import com.example.ad2l2.ui.home.Listen;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
-public class DashboardFragment extends Fragment {
+import java.util.ArrayList;
+import java.util.List;
 
-    private DashboardViewModel dashboardViewModel;
+public class DashboardFragment extends Fragment implements Listen {
+
+ private FragmentDashboardBinding binding;
+private HomeAdapter adapter;
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        adapter = new HomeAdapter(this);
+    }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+
+        binding = FragmentDashboardBinding.inflate( inflater,container,false);
+        binding.recyclerView.setAdapter(adapter);
+        setFirestoreData();
+        return binding.getRoot();
+    }
+
+    private void setFirestoreData() {
+        FirebaseFirestore.getInstance().collection("notes").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    List<HomeModel> list = task.getResult().toObjects(HomeModel.class);
+                    adapter.addItemList(list);
+                } else {
+                }
             }
+
         });
-        return root;
+
+
+    }
+
+    @Override
+    public void setDatForFrom(HomeModel homeModel, int position) {
+
+    }
+
+    @Override
+    public void del(int position) {
+
     }
 }

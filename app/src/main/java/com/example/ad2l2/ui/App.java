@@ -1,4 +1,4 @@
-package com.example.ad2l2;
+package com.example.ad2l2.ui;
 import android.app.Application;
 
 import androidx.room.Room;
@@ -14,6 +14,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+
         prefsHelper = new PrefsHelper(this);
 
 

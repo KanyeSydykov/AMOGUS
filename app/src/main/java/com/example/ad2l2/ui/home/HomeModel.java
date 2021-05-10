@@ -14,6 +14,10 @@ public class HomeModel implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
+    private String description;
+
+    public HomeModel() {
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -50,7 +54,7 @@ public class HomeModel implements Serializable {
         this.description = description;
     }
 
-    private String description;
+
 
     //public DateFormat getDateFormat() {
     ///     return dateFormat;

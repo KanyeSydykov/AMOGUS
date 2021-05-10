@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.ad2l2.databinding.ListItemBinding;
+import com.example.ad2l2.ui.App;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,10 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
         list = homeModelList;
         notifyDataSetChanged();
      }
+
+    public void addItemList(List<HomeModel> list) {
+    }
+
     class HomeViewHolder extends  RecyclerView.ViewHolder{
         public HomeViewHolder(@NonNull ListItemBinding itemView) {
 

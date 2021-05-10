@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentProfileBinding;
+import com.example.ad2l2.ui.App;
 
 import java.io.IOException;
 

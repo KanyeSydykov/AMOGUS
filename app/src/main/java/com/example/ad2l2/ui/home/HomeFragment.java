@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,7 +16,12 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentHomeBinding;
+import com.example.ad2l2.ui.App;
 import com.example.ad2l2.utils.PrefsHelper;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,7 +88,16 @@ public class HomeFragment extends Fragment implements Listen {
                             model.setDescription(b);
                             App.fillDatabase.fillDao().update(model);
                         } else {
-                            App.fillDatabase.fillDao().insert(new HomeModel(a, b));
+                            HomeModel newModel = new HomeModel(a,b);
+                            App.fillDatabase.fillDao().insert(newModel);
+                            FirebaseFirestore.getInstance().collection("Nuriel")
+                                    .add(newModel).addOnCompleteListener(task -> {
+                                    if (task.isSuccessful()){
+                                        Toast.makeText(requireContext(),"Success",Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(requireContext(),"Failure",Toast.LENGTH_SHORT).show();
+                                    }
+                                    });
                         }
                     }
                 });
@@ -96,5 +111,10 @@ public class HomeFragment extends Fragment implements Listen {
         bundle.putInt("id", homeModel.getId());
         getParentFragmentManager().setFragmentResult("2", bundle);
         navController.navigate(R.id.action_navigation_home_to_formFragment);
+    }
+
+    @Override
+    public void del(int position) {
+
     }
 }

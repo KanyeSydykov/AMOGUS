@@ -1,10 +1,12 @@
 package com.example.ad2l2.ui.dashboard;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.ad2l2.R;
 import com.example.ad2l2.databinding.FragmentDashboardBinding;
+import com.example.ad2l2.ui.home.FireBaseModel;
 import com.example.ad2l2.ui.home.HomeAdapter;
 import com.example.ad2l2.ui.home.HomeModel;
 import com.example.ad2l2.ui.home.Listen;
@@ -45,16 +48,13 @@ private HomeAdapter adapter;
     }
 
     private void setFirestoreData() {
-        FirebaseFirestore.getInstance().collection("notes").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<HomeModel> list = task.getResult().toObjects(HomeModel.class);
-                    adapter.addItemList(list);
-                } else {
-                }
+        FirebaseFirestore.getInstance().collection("Karl").get().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                List<HomeModel> list = task.getResult().toObjects(HomeModel.class);
+                adapter.addItemList(list);
+            } else {
+                Toast.makeText(requireContext(), task.getException().getMessage() , Toast.LENGTH_SHORT).show();
             }
-
         });
 
 

@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Random;
 
 @Entity
@@ -62,6 +63,15 @@ public class HomeModel implements Serializable {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public String toString() {
+        return "HomeModel{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
 

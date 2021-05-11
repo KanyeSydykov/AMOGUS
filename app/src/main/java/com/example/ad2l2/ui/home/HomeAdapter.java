@@ -48,8 +48,8 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
         return list.size();
     }
 
-    public void addList(HomeModel homeModel) {
-        list.add(homeModel);
+    public void addList(List<HomeModel> homeModel) {
+        list.addAll(homeModel);
         notifyDataSetChanged();
     }
 
@@ -61,13 +61,12 @@ public class HomeAdapter extends RecyclerView.Adapter <HomeAdapter.HomeViewHolde
 
         }return null;
     }
-     public void addList(List<HomeModel> homeModelList){
+     public void addItemList(List<HomeModel> homeModelList){
         list = homeModelList;
         notifyDataSetChanged();
      }
 
-    public void addItemList(List<HomeModel> list) {
-    }
+
 
     class HomeViewHolder extends  RecyclerView.ViewHolder{
         public HomeViewHolder(@NonNull ListItemBinding itemView) {
